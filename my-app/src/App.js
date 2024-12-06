@@ -19,39 +19,52 @@ function GetWeather() {
     const currentDateFunction = () => {
         const months = [
             'January',
-            . . . . . . . . .
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
             'December',
         ];
         const WeekDays = [
             'Sunday',
-             . . . . . . . 
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
             'Saturday',
         ];
         const currentDate = new Date();
-        const date = `${WeekDays[currentDate.getDay()]} . . . . . . . . . . ;
-        return . . . .;
+        const date = `${WeekDays[currentDate.getDay()]} ${months[currentDate.getMonth()]}`;
+        return date;
     };
 
 /* Define an async function that makes a GET request to the OpenWeatherMap API using the axios package. It takes the user-entered city and the API key from the .env file as parameters */
 
-    const ________ = _______ (event) => {
+    const forecast = async (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             setInput('');
             setWeather({ ...weather, loading: true });
             const url = 'https://api.openweathermap.org/data/2.5/weather';
-            const api_key = '_________________________';
+            const api_key = '7aeae3603e130d440379d2284563349c';
             await axios
                 .get(url, {
                     params: {
-                        q: _______,
-                        units: '_____',
+                        q: 'Los Angeles',
+                        units: 'metric',
                         appid: api_key,
                     },
                 })
                 .then((res) => {
                     console.log('res', res);
-                    setWeather({ data: ____, loading: false, error: false });
+                    setWeather({ data: res.data, loading: false, error: false });
                 })
                 .catch((error) => {
                     setWeather({ ...weather, data: {}, error: true });
