@@ -57,7 +57,7 @@ function GetWeather() {
             await axios
                 .get(url, {
                     params: {
-                        q: 'Los Angeles',
+                        q: input,
                         units: 'metric',
                         appid: api_key,
                     },
@@ -74,20 +74,20 @@ function GetWeather() {
         }
     };
 
-_____________ (
+return (
         <div className="App">
             <h1 className="app-name">
-                ________________
+                Weather App
             </h1>
             <div className="search-bar">
-                <_______________
+                <input
                     type="text"
                     className="city-search"
-                    placeholder="_____________"
+                    placeholder="Enter city name"
                     name="query"
-                    value={_____________}
-                    onChange={(event) =>__________________________}
-                    onKeyDown={_______}
+                    value={input}
+                    onChange={(event) => setInput(event.target.value)}
+                    onKeyDown={forecast}
                 />
             </div>
             {weather.loading && (
@@ -107,11 +107,11 @@ _____________ (
                     </span>
                 </>
             )}
-            {weather && weather.___ && weather.data._____ && (
+            {weather && weather.data && weather.data.main && (
                 <div>
                     <div className="city-name">
                         <h2>
-                            {weather.data._______}, <span>{weather.data.sys._______}</span>
+                            {weather.data.name}, <span>{weather.data.sys.country}</span>
                         </h2>
                     </div>
                     <div className="date">
@@ -120,15 +120,15 @@ _____________ (
                     <div className="icon-temp">
                         <img
                             className=""
-                            src={`https://openweathermap.org/img/wn/${weather.data._____________________}@2x.png`}
-                            alt={weather.data.______________________}
+                            src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`}
+                            alt={weather.data.weather[0].description}
                         />
-                        {Math.round(weather.data._________________)}
+                        {Math.round(weather.data.main.temp)}
                         <sup className="deg">°C</sup>
                     </div>
                     <div className="des-wind">
-                        <p>{weather.data.________________}</p>
-                        <p>Wind Speed: {weather.data._________________}m/s</p>
+                        <p>{weather.data.weather[0].description}</p>
+                        <p>Wind Speed: {weather.data.wind.speed} m/s</p>
                     </div>
                 </div>
             )}
@@ -136,4 +136,4 @@ _____________ (
     );
 }
 
-export default ______________________;
+export default GetWeather;
