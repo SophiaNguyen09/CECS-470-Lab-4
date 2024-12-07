@@ -115,7 +115,7 @@ return (
                         </h2>
                     </div>
                     <div className="date">
-                        <span>{toDateFunction()}</span>
+                        <span>{currentDateFunction()}</span>
                     </div>
                     <div className="icon-temp">
                         <img
